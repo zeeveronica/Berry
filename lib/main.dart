@@ -1,6 +1,5 @@
+import 'package:berry/Screeens/homeScreen.dart';
 import 'package:flutter/material.dart';
-
-import 'Screeens/homeScreen.dart';
 
 void main() {
   runApp(const MyApp());

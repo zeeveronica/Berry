@@ -1,6 +1,8 @@
 import 'package:berry/Common/Constant.dart';
 import 'package:berry/Common/appbar.dart';
 import 'package:berry/Common/bottomnavigation.dart';
+import 'package:berry/Screeens/commn_class.dart';
+import 'package:berry/Screeens/recommamend_products.dart';
 import 'package:berry/Screeens/sideheading.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
@@ -15,7 +17,12 @@ class HomeScreen extends StatefulWidget {
 ScrollController _scrollController = ScrollController();
 
 class _HomeScreenState extends State<HomeScreen> {
-  List lsImage = ['images/black_grapes.jpg', 'images/dragon.jpg', 'images/grapes.jpg', 'images/lemon.jpg'];
+  List lsImage = [
+    'images/black_grapes.jpg',
+    'images/dragon.jpg',
+    'images/grapes.jpg',
+    'images/lemon.jpg'
+  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -54,15 +61,21 @@ class _HomeScreenState extends State<HomeScreen> {
             )),
         CarouselSlider.builder(
           itemCount: lsImage.length,
-          itemBuilder: (BuildContext context, int itemIndex, int pageViewIndex) => GestureDetector(
+          itemBuilder:
+              (BuildContext context, int itemIndex, int pageViewIndex) =>
+                  GestureDetector(
             onTap: () {},
             child: Container(
-                margin: EdgeInsets.only(left: kdefaultpadding, top: kdefaultpadding / 2, bottom: kdefaultpadding * 2.5),
+                margin: EdgeInsets.only(
+                    left: kdefaultpadding,
+                    top: kdefaultpadding / 2,
+                    bottom: kdefaultpadding * 2.5),
                 width: size.width * 0.8,
                 //  height: 185,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
-                  image: DecorationImage(image: AssetImage(lsImage[itemIndex]), fit: BoxFit.cover),
+                  image: DecorationImage(
+                      image: AssetImage(lsImage[itemIndex]), fit: BoxFit.cover),
                 )),
           ),
           options: CarouselOptions(
@@ -77,7 +90,8 @@ class _HomeScreenState extends State<HomeScreen> {
             autoPlayAnimationDuration: const Duration(milliseconds: 800),
             autoPlayCurve: Curves.fastOutSlowIn,
             enlargeCenterPage: true,
-            onPageChanged: (index, reason) => setState(() => currentIndex = index),
+            onPageChanged: (index, reason) =>
+                setState(() => currentIndex = index),
             scrollDirection: Axis.horizontal,
           ),
         ),
@@ -85,6 +99,12 @@ class _HomeScreenState extends State<HomeScreen> {
           title: "Categories",
           press: () {},
         ),
+        ExpandContainer(),
+        TitleWithMoreButton(
+          title: "Recommended",
+          press: () {},
+        ),
+        RecommendPlant()
       ]),
     );
   }

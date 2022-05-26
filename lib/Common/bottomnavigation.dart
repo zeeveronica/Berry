@@ -36,7 +36,7 @@ class _NextPageState extends State<NextPage> {
           tabBackgroundColor: kprimaryColor,
           color: Colors.black,
           padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 12),
-          tabs: [
+          tabs: const [
             GButton(
               icon: Icons.apps,
               text: 'Home',
@@ -52,7 +52,10 @@ class _NextPageState extends State<NextPage> {
               text: 'Cart',
               textColor: Colors.white,
             ),
-            GButton(icon: Icons.settings, text: 'Settings', textColor: Colors.white),
+            GButton(
+                icon: Icons.settings,
+                text: 'Settings',
+                textColor: Colors.white),
           ],
         ));
   }
