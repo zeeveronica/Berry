@@ -23,7 +23,7 @@ class DetailedScreen extends StatefulWidget {
 
 class _DetailedScreenState extends State<DetailedScreen> {
   late double totalPrice;
-  int count = 1;
+  int count = 0;
   bool addCArtClick = false;
   bool favorite = false;
   @override

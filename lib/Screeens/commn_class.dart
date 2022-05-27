@@ -32,7 +32,26 @@ class _ExpandContainerState extends State<ExpandContainer> {
     'Pomegranate',
     'Banana',
   ];
-
+  List productsImage = [
+    'images/Golden-Delicious-Apples.png',
+    'images/15-strawberry.png',
+    'images/cara-cara-oranges.png',
+    'images/pinotnoir.png',
+    'images/21-215472_peach-mango-png-julie-mango.png',
+    'images/straberry.png',
+    'images/tom.png',
+    'images/pngaaa.com-1260165.png',
+  ];
+  List productName = [
+    'Golden Delicious',
+    'jewel',
+    'Cara Cara Orange',
+    'Pinotnoir',
+    'Payari Mango',
+    'Strawerry Guva',
+    'Toms Red',
+    'Red Banana'
+  ];
   bool limitedshow = true;
   // void initState() {
   //   if (widget.categoriesDetails.length > 16) {
@@ -74,8 +93,10 @@ class _ExpandContainerState extends State<ExpandContainer> {
                         context,
                         MaterialPageRoute(
                             builder: (context) => CategoriesRoute(
-                                  lsImage: 'images/9-apple.png',
-                                  lsTitle: 'Apple',
+                                  lsImage: categoriesDetails[index],
+                                  lsTitle: categoriesName[index],
+                                  productImage: productsImage[index],
+                                  productName: productName[index],
                                 )));
                   },
                   child: Container(
@@ -94,7 +115,7 @@ class _ExpandContainerState extends State<ExpandContainer> {
                   padding: const EdgeInsets.only(left: 8.0, right: 4),
                   child: Text(
                     categoriesName[index],
-                    maxLines: 2,
+                    maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                     softWrap: false,
                     //maxLines: 50,

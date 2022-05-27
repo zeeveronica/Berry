@@ -11,7 +11,8 @@ class CustomSliverAppBarDelegate extends SliverPersistentHeaderDelegate {
   });
 
   @override
-  Widget build(BuildContext context, double shrinkOffset, bool overlapsContent) {
+  Widget build(
+      BuildContext context, double shrinkOffset, bool overlapsContent) {
     final size = 60;
     final top = expandedHeight - shrinkOffset - size / 2;
 
@@ -21,27 +22,14 @@ class CustomSliverAppBarDelegate extends SliverPersistentHeaderDelegate {
       children: [
         buildAppbarBackground(shrinkOffset),
         buildAppBar(shrinkOffset),
-        Positioned(
+        const Positioned(
           bottom: 40,
           left: 20,
           right: 20,
-          child: Row(
-            children: [
-              Text(
-                'Hi Botanic!',
-                style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 25),
-              ),
-              Spacer(),
-              ClipOval(
-                clipBehavior: Clip.antiAlias,
-                child: Image.asset(
-                  "images/berry_logo.jpg",
-                  width: 60,
-                  height: 60,
-                  fit: BoxFit.cover,
-                ),
-              ),
-            ],
+          child: Text(
+            'Hi Friends!',
+            style: TextStyle(
+                color: Colors.white, fontWeight: FontWeight.bold, fontSize: 25),
           ),
         ),
         Positioned(
@@ -88,9 +76,26 @@ class CustomSliverAppBarDelegate extends SliverPersistentHeaderDelegate {
             bottom: Radius.circular(36),
           ),
         ),
-        title: Text(
-          '𝓑𝓮𝓻𝓻𝔂',
-          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 40),
+        title: Row(
+          children: [
+            Text(
+              '𝓑𝓮𝓻𝓻𝔂',
+              style: TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 40),
+            ),
+            Spacer(),
+            ClipOval(
+              clipBehavior: Clip.antiAlias,
+              child: Image.asset(
+                "images/berry_logo.jpg",
+                width: 50,
+                height: 50,
+                fit: BoxFit.cover,
+              ),
+            ),
+          ],
         ),
         titleTextStyle: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
       ));
@@ -99,14 +104,16 @@ class CustomSliverAppBarDelegate extends SliverPersistentHeaderDelegate {
         opacity: disappear(shrinkOffset),
         child: Row(children: [
           Padding(
-            padding: const EdgeInsets.only(left: 5.0, top: 2, right: 0, bottom: 5),
+            padding:
+                const EdgeInsets.only(left: 5.0, top: 2, right: 0, bottom: 5),
             child: SizedBox(
               width: MediaQuery.of(context).size.width * 0.85,
               height: 50,
               child: TextFormField(
                 decoration: InputDecoration(
                   hintText: "Search products and categories",
-                  hintStyle: TextStyle(fontSize: 12, fontWeight: FontWeight.w300),
+                  hintStyle:
+                      TextStyle(fontSize: 12, fontWeight: FontWeight.w300),
                   prefixIcon: Icon(
                     Icons.search_rounded,
                     size: 30,

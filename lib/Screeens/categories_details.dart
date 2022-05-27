@@ -1,6 +1,6 @@
 import 'package:badges/badges.dart';
 import 'package:berry/Common/Constant.dart';
-import 'package:berry/Screeens/recommamend_products.dart';
+import 'package:berry/Screeens/product_detail_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -8,11 +8,14 @@ import 'package:flutter/rendering.dart';
 class CategoriesRoute extends StatefulWidget {
   final String lsImage;
   final String lsTitle;
-
+  final String productImage;
+  final String productName;
   const CategoriesRoute({
     Key? key,
     required this.lsImage,
     required this.lsTitle,
+    required this.productImage,
+    required this.productName,
   }) : super(key: key);
 
   @override
@@ -140,9 +143,8 @@ class _CategoriesRouteState extends State<CategoriesRoute> {
         controller: _scrollController,
         physics: ScrollPhysics(),
         // primary: true,
-        child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.start,
+        child: Column(crossAxisAlignment: CrossAxisAlignment.center,
+            // mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Container(
                   height: 250,
@@ -183,24 +185,133 @@ class _CategoriesRouteState extends State<CategoriesRoute> {
                   shrinkWrap: true,
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 2,
-                    mainAxisSpacing: 15,
-                    childAspectRatio: MediaQuery.of(context).size.height / 1100,
+                    mainAxisSpacing: 25,
+                    childAspectRatio: MediaQuery.of(context).size.height / 750,
                   ),
                   physics: NeverScrollableScrollPhysics(),
                   itemCount: 10,
                   itemBuilder: (BuildContext context, int index) {
-                    return const RecommedPlantCard(
-                      images: "images/1-2-avocado.png",
-                      name: "Avocado",
-                      country: "India",
-                      price: 250,
-                      description:
-                          'Avocado fruits have greenish or yellowish flesh with a buttery consistency and a rich nutty flavour. They are often eaten in salads, and in many parts of the world they are eaten as a dessert. Mashed avocado is the principal ingredient of guacamole, a characteristic saucelike condiment in Mexican cuisine',
-                      quantity: '1 Kg',
+                    return CategoriesProduct(
+                      images: widget.productImage,
+                      names: widget.productName,
+                      index: index,
                     );
                   })
             ]),
       ),
     ));
+  }
+}
+
+class CategoriesProduct extends StatefulWidget {
+  final String images;
+  final String names;
+  final int index;
+  const CategoriesProduct(
+      {Key? key,
+      required this.images,
+      required this.names,
+      required this.index})
+      : super(key: key);
+
+  @override
+  State<CategoriesProduct> createState() => _CategoriesProductState();
+}
+
+class _CategoriesProductState extends State<CategoriesProduct> {
+  @override
+  Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
+
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => DetailedScreen(
+                      image: widget.images,
+                      name: widget.names,
+                      price: 200.0,
+                      description:
+                          'The deciduous leaves are borne alternately on long petioles (leaf stems), and young leaves are covered with reddish hairs.',
+                      quantity: " 1 kg",
+                    )));
+      },
+      child: Container(
+        // height: 400,
+        margin: EdgeInsets.only(
+          // top: kdefaultpadding / 2,
+          left: kdefaultpadding - 10,
+          right: kdefaultpadding - 10,
+          //bottom: kdefaultpadding * 2.5
+        ),
+        decoration: BoxDecoration(
+            color: Colors.grey.shade100,
+            borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(10), topRight: Radius.circular(10))),
+//height: size.height*0.4,
+        width: size.width * 0.4,
+        child: Column(
+          children: [
+            Image.asset(
+              widget.images,
+              height: 100,
+              width: size.width * 0.4,
+              fit: BoxFit.fitWidth,
+            ),
+            Container(
+              padding: EdgeInsets.all(kdefaultpadding / 2),
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.only(
+                      bottomLeft: Radius.circular(10),
+                      bottomRight: Radius.circular(10)),
+                  color: Colors.white,
+                  boxShadow: [
+                    BoxShadow(
+                        color: kprimaryColor.withOpacity(0.23),
+                        offset: Offset(0, 10),
+                        blurRadius: 50)
+                  ]),
+              child: Column(
+                children: [
+                  Text(widget.names.toUpperCase(),
+                      style: Theme.of(context).textTheme.button),
+                  Row(children: [
+                    Badge(
+                      badgeContent: Text(
+                        '',
+                        style: TextStyle(
+                            fontSize: 10,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white),
+                      ),
+                      elevation: 0,
+                      badgeColor: kprimaryColor,
+                      position: BadgePosition.topEnd(top: 2, end: 1),
+                      child: IconButton(
+                        onPressed: () {},
+                        icon: Icon(
+                          Icons.shopping_cart,
+                          size: 30,
+                          color: kprimaryColor,
+                        ),
+                      ),
+                    ),
+                    Spacer(),
+                    Text(
+                      "₹ 450",
+                      style: Theme.of(context)
+                          .textTheme
+                          .button!
+                          .copyWith(color: kprimaryColor),
+                    )
+                  ]),
+                ],
+              ),
+            )
+          ],
+        ),
+      ),
+    );
   }
 }
